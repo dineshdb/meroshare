@@ -17,10 +17,10 @@ function getUsernamePassword(): { demat: string; password: string } {
   const demat = Deno.env.get("DEMAT_ACCOUNT");
   const password = Deno.env.get("DEMAT_PASSWORD");
   if (demat?.length !== 16) {
-    throw new Error("valid demat account should be provided");
+    throw new Error("DEMAT_ACCOUNT should be provided");
   }
   if (!isNotNil(password)) {
-    throw new Error("password is needed");
+    throw new Error("DEMAT_PASSWORD is needed");
   }
   return { demat, password };
 }
