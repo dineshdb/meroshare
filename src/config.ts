@@ -1,5 +1,5 @@
+import keyBy from "./_/keyby.ts";
 import { getCapitals } from "./getCapitals.ts";
-import { isNotNil, keyBy } from "@es-toolkit/es-toolkit";
 
 export type UserDetails = {
   demat: string;
@@ -19,7 +19,7 @@ function getUsernamePassword(): { demat: string; password: string } {
   if (demat?.length !== 16) {
     throw new Error("DEMAT_ACCOUNT should be provided");
   }
-  if (!isNotNil(password)) {
+  if (!password || password === "") {
     throw new Error("DEMAT_PASSWORD is needed");
   }
   return { demat, password };
@@ -29,7 +29,7 @@ export async function loadConfig(): Promise<LoginDetails> {
   const { demat, password } = getUsernamePassword();
 
   const capitals = await getCapitals();
-  const capitalsMap = keyBy(capitals, (capital) => capital.code);
+  const capitalsMap = keyBy(capitals, "code");
 
   const clientCode = demat.substring(3, 8);
   const username = demat.substring(8, demat.length);

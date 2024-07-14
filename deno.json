@@ -1,11 +1,8 @@
 {
   "name": "@util/meroshare",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "exports": "./mod.ts",
   "tasks": {
     "dev": "deno run --watch main.ts"
-  },
-  "imports": {
-    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.7.0"
   }
 }
