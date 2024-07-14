@@ -3,6 +3,7 @@ import { getPortfolioCsv } from "./src/getPortfolioCsv.ts";
 import { getPortfolio } from "./src/getPortfolio.ts";
 import { login } from "./src/login.ts";
 import { getOwnDetail } from "./src/getOwnDetail.ts";
+import { getApplicableIssues } from "./src/getApplicableIssues.ts";
 
 type Args = {
   command: string;
@@ -23,6 +24,13 @@ const commands: Record<string, (args: Args) => void> = {
     loginDetails.authorization = authorization!;
     const portfolio = await getPortfolio(loginDetails);
     console.log(portfolio);
+  },
+  "apply": async () => {
+    const loginDetails = await loadConfig();
+    const { authorization } = await login(loginDetails);
+    loginDetails.authorization = authorization!;
+    const issues = await getApplicableIssues(loginDetails);
+    console.log(issues);
   },
   info: async () => {
     const loginDetails = await loadConfig();
